@@ -14,7 +14,7 @@
         <img :src="~assets / images / trumpImage" />
       </div>
       <div v-else>
-        <img src="~assets/backcard/card_back.png" />
+        <img class="trumpShape" src="@/assets/backcard/card_back.png" />
       </div>
     </div>
   </div>
@@ -73,7 +73,5 @@ export default {
   margin: 5px;
   box-sizing: border-box;
   float: left;
-  background-image: url("~assets/backcard/card_back.png");
-  background-size: cover;
 }
 </style>
