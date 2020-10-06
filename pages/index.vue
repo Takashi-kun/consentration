@@ -28,7 +28,6 @@ export default {
   data() {
     const mark = ["h", "d", "c", "s"];
     const trumps = [];
-    // console.log(trumps)
     for (let i = 0; i < 4; i++) {
       for (let k = 1; k <= 13; k++) {
         trumps.push({
@@ -44,11 +43,11 @@ export default {
       const tmp = trumps[h];
       trumps[h] = trumps[m];
       trumps[m] = tmp;
-      // console.log(trumps[h])
     }
     return {
       trumps: trumps, // trumpsプロパティをもつ連想配列
       lastSelected: null,
+      block: false,
     };
   },
   methods: {
@@ -56,6 +55,11 @@ export default {
       if (trump.surface === true) {
         return;
       }
+      if (this.block === true) {
+        // blocked for flipping
+        return;
+      }
+
       trump.surface = true;
       if (this.lastSelected === null) {
         this.lastSelected = trump;
@@ -70,6 +74,7 @@ export default {
           trump.trumpMark,
           trump.trumpNum
         );
+        this.block = false;
       } else {
         setTimeout(
           (scope) => {
