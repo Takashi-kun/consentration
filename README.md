@@ -6,7 +6,7 @@
 
 ``` bash
 # install dependencies
-$ npm run install
+$ npm install
 
 # serve with hot reload at localhost:3000
 $ npm run dev
@@ -20,5 +20,5 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
-"# consentration" 
-"# gitHub.test" 
+"# consentration"
+"# gitHub.test"
