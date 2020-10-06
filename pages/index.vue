@@ -11,7 +11,10 @@
       <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
       <!-- ④@clickでクリックしたらisSurfaceをmethodsのisSurfaceに渡している -->
       <div v-if="trump.surface === true">
-        <img class="trumpShape" :src="require('@/assets/images/h01.gif')" />
+        <img
+          class="trumpShape"
+          :src="require('@/assets/images/' + trump.trumpFileName)"
+        />
       </div>
       <div v-else>
         <img class="trumpShape" src="@/assets/backcard/card_back.png" />
@@ -28,7 +31,12 @@ export default {
     // console.log(trumps)
     for (let i = 0; i < 4; i++) {
       for (let k = 1; k <= 13; k++) {
-        trumps.push({ trumpMark: mark[i], trumpNum: k, surface: false });
+        trumps.push({
+          trumpMark: mark[i],
+          trumpNum: k,
+          surface: false,
+          trumpFileName: mark[i] + ("00" + k).slice(-2) + ".gif",
+        });
       }
     }
     for (let h = trumps.length - 1; h >= 0; h--) {
