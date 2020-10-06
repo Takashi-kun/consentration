@@ -3,7 +3,7 @@
     <div
       v-for="(trump, i) in trumps"
       :key="i"
-      class="trumpShape"
+      class="trump-shape"
       @click="clickTrump(trump)"
     >
       <!-- ①trumpsの配列を引っ張ってきている。 -->
@@ -12,12 +12,12 @@
       <!-- ④@clickでクリックしたらisSurfaceをmethodsのisSurfaceに渡している -->
       <div v-if="trump.surface === true">
         <img
-          class="trumpShape"
-          :src="require('@/assets/images/' + trump.trumpFileName)"
+          class="trump-shape"
+          :src="require('@/assets/images/' + trump.fileName)"
         />
       </div>
       <div v-else>
-        <img class="trumpShape" src="@/assets/backcard/card_back.png" />
+        <img class="trump-shape" src="@/assets/backcard/card_back.png" />
       </div>
     </div>
   </div>
@@ -26,15 +26,14 @@
 <script>
 export default {
   data() {
-    const mark = ["h", "d", "c", "s"];
     const trumps = [];
-    for (let i = 0; i < 4; i++) {
+    for (const [_, mark] of ["h", "d", "c", "s"].entries()) {
       for (let k = 1; k <= 13; k++) {
         trumps.push({
-          trumpMark: mark[i],
-          trumpNum: k,
+          mark: mark,
+          num: k,
           surface: false,
-          trumpFileName: mark[i] + ("00" + k).slice(-2) + ".gif",
+          fileName: mark + ("00" + k).slice(-2) + ".gif",
         });
       }
     }
@@ -67,14 +66,14 @@ export default {
       }
 
       this.block = true;
-      if (this.lastSelected.trumpNum === trump.trumpNum) {
+      if (this.lastSelected.num === trump.num) {
         // matched
         console.log(
           "matched: lastSelectd:{mark: %s, num: %s}, current:{mark: %s, num:%s}",
-          this.lastSelected.trumpMark,
-          this.lastSelected.trumpNum,
-          trump.trumpMark,
-          trump.trumpNum
+          this.lastSelected.mark,
+          this.lastSelected.num,
+          trump.mark,
+          trump.num
         );
         this.block = false;
       } else {
@@ -105,7 +104,7 @@ export default {
   margin: 50px auto;
   padding: 10px;
 }
-.trumpShape {
+.trump-shape {
   height: 120px;
   width: 80px;
   margin: 5px;
