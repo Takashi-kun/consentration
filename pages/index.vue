@@ -48,20 +48,43 @@ export default {
     }
     return {
       trumps: trumps, // trumpsプロパティをもつ連想配列
+      lastSelected: null,
     };
   },
   methods: {
     clickTrump(trump) {
-      const trumpImage = [];
-      console.log(trumpImage);
-      if (trump.surface === false) {
-        trump.surface = true;
+      if (trump.surface === true) {
+        return;
       }
-      if (trump.trumpNum < 10) {
-        trumpImage.push([trump.trumpMark + "0" + trump.trumpNum]);
+      trump.surface = true;
+      if (this.lastSelected === null) {
+        this.lastSelected = trump;
+        return;
+      }
+      if (this.lastSelected.trumpNum === trump.trumpNum) {
+        // matched
+        console.log(
+          "matched: lastSelectd:{mark: %s, num: %s}, current:{mark: %s, num:%s}",
+          this.lastSelected.trumpMark,
+          this.lastSelected.trumpNum,
+          trump.trumpMark,
+          trump.trumpNum
+        );
       } else {
-        trumpImage.push([trump.trumpMark + trump.trumpNum]);
+        setTimeout(
+          (scope) => {
+            scope.curTrump.surface = false;
+            scope.lastTrump.surface = false;
+            this.block = false;
+          },
+          1000,
+          {
+            lastTrump: this.lastSelected,
+            curTrump: trump,
+          }
+        );
       }
+      this.lastSelected = null;
     },
   },
 };
