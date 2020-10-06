@@ -65,6 +65,8 @@ export default {
         this.lastSelected = trump;
         return;
       }
+
+      this.block = true;
       if (this.lastSelected.trumpNum === trump.trumpNum) {
         // matched
         console.log(
