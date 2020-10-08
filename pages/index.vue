@@ -1,24 +1,12 @@
 <template>
   <div class="consentration-box">
-    <div
-      v-for="(trump, i) in trumps"
-      :key="i"
-      class="trump-shape"
-      @click="clickTrump(trump)"
-    >
-      <!-- ①trumpsの配列を引っ張ってきている。 -->
-      <!-- ②trumpで①の配列の中身（連想配列）を引っ張っている -->
-      <!-- ③i は代入するもの。（配列の番号）（文字は何でも良い） -->
-      <!-- ④@clickでクリックしたらisSurfaceをmethodsのisSurfaceに渡している -->
-      <div v-if="trump.surface === true">
-        <img
-          class="trump-shape"
-          :src="require('@/assets/images/' + trump.fileName)"
-        />
-      </div>
-      <div v-else>
-        <img class="trump-shape" src="@/assets/backcard/card_back.png" />
-      </div>
+    <div v-for="(trump, i) in trumps" :key="i" @click="clickTrump(trump)">
+      <img
+        v-if="trump.surface === true"
+        class="trump-shape"
+        :src="require('@/assets/images/' + trump.fileName)"
+      />
+      <img v-else class="trump-shape" src="@/assets/backcard/card_back.png" />
     </div>
   </div>
 </template>
@@ -44,7 +32,7 @@ export default {
       trumps[m] = tmp;
     }
     return {
-      trumps: trumps, // trumpsプロパティをもつ連想配列
+      trumps: trumps,
       lastSelected: null,
       block: false,
     };
