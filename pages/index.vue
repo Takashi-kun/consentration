@@ -1,6 +1,10 @@
 <template>
   <div class="consentration-box">
-    <div v-for="(trump, i) in trumps" :key="i" @click="clickTrump(trump)">
+    <div
+      v-for="trump in trumps"
+      :key="trump.mark + trump.num"
+      @click="clickTrump(trump)"
+    >
       <img
         v-if="trump.surface === true"
         class="trump-shape"
